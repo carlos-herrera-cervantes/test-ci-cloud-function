@@ -1,0 +1,16 @@
+{
+  "name": "cloud-function-test-ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^9.4.1",
+    "firebase-functions": "^3.11.0"
+  }
+}

@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    environment: staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Deploy Cloud Function
+        
+        run: |
+          ls -la
+          cd ./source
+          gcloud functions deploy test-ci --entry-point customHandler --trigger-http --region=us-central1 --runtime=nodejs10 --verbosity=debug --allow-unauthenticated --project ${{ secrets.GCP_PROJECT_ID }}
